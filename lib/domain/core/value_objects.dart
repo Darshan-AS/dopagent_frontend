@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dopagent_frontend/domain/core/errors.dart';
 import 'package:dopagent_frontend/domain/core/failures.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -18,5 +19,5 @@ abstract class ValueObject<T> extends Equatable {
 
   bool isValid() => value.isRight();
 
-  // T getOrThrow({e: UnexpectedValueError}) => value.fold((f) => throw e(f), id);
+  T getOrThrow({e: UnexpectedValueError}) => value.fold((f) => throw e(f), id);
 }
