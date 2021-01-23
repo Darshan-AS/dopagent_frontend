@@ -1,6 +1,9 @@
+import 'package:dopagent_frontend/injection.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
 void main() {
+  configureDependencies();
   runApp(MyApp());
 }
 
