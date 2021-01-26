@@ -4,6 +4,7 @@ import 'package:dopagent_frontend/domain/core/failures.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 @immutable
 abstract class ValueObject<T> extends Equatable {
@@ -19,5 +20,20 @@ abstract class ValueObject<T> extends Equatable {
 
   bool isValid() => value.isRight();
 
-  T getOrThrow({e: UnexpectedValueError}) => value.fold((f) => throw e(f), id);
+  T getOrThrow({e = UnexpectedValueError}) => value.fold((f) => throw e(f), id);
+}
+
+class UniqueId extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+  
+  factory UniqueId() {
+    return UniqueId._(right(Uuid().v1()));
+  }
+  const UniqueId._(this.value);
+
+  factory UniqueId.fromUniqueString(String uniqueId) {
+    assert(uniqueId != null);
+    return UniqueId._(right(uniqueId));
+  }
 }
