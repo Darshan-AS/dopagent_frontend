@@ -22,7 +22,7 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Option<Agent>> getSignedInAgent() async {
-    return optionOf(_firebaseAuth.currentUser.toDomain());
+    return optionOf(_firebaseAuth.currentUser?.toDomain());
   }
 
   @override
@@ -38,12 +38,12 @@ class FirebaseAuthFacade implements IAuthFacade {
         email: emailString,
         password: passwordString,
       );
-      return const Right(unit);
-    } on PlatformException catch (e) {
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-        return const Left(AuthFailure.emailAlreadyInUse());
+        return left(const AuthFailure.emailAlreadyInUse());
       } else {
-        return const Left(AuthFailure.serverError());
+        return left(const AuthFailure.serverError());
       }
     }
   }
@@ -61,13 +61,13 @@ class FirebaseAuthFacade implements IAuthFacade {
         email: emailString,
         password: passwordString,
       );
-      return const Right(unit);
-    } on PlatformException catch (e) {
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'ERROR_WRONG_PASSWORD' ||
           e.code == 'ERROR_USER_NOT_FOUND') {
-        return const Left(AuthFailure.invalidEmailOrPassword());
+        return left(const AuthFailure.invalidEmailOrPassword());
       } else {
-        return const Left(AuthFailure.serverError());
+        return left(const AuthFailure.serverError());
       }
     }
   }
@@ -85,9 +85,9 @@ class FirebaseAuthFacade implements IAuthFacade {
       );
 
       await _firebaseAuth.signInWithCredential(authCredential);
-      return const Right(unit);
-    } on PlatformException catch (_) {
-      return const Left(AuthFailure.serverError());
+      return right(unit);
+    } on FirebaseAuthException catch (_) {
+      return left(const AuthFailure.serverError());
     }
   }
 
