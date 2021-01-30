@@ -1,5 +1,5 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:dopagent_frontend/application/auth/sign_in_form/sign_in_form_bloc.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,23 +7,21 @@ class SignInForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
-      listener: (context, state) {
-        state.authResponseOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) => FlushbarHelper.createError(
-              message: failure.map(
-                  cancelledByUser: (_) => "Cancelled",
-                  serverError: (_) => "Server Error",
-                  emailAlreadyInUse: (_) => "Email already in use",
-                  invalidEmailOrPassword: (_) => "Invalid Email or Password"),
-            ).show(context),
-            (_) => {
-              // TODO: Navigae
-            },
-          ),
-        );
-      },
+      listener: (context, state) => state.authResponseOption.fold(
+        () {},
+        (either) => either.fold(
+          (failure) => FlushbarHelper.createError(
+            message: failure.when(
+                cancelledByUser: () => "Cancelled",
+                serverError: () => "Server Error",
+                emailAlreadyInUse: () => "Email already in use",
+                invalidEmailOrPassword: () => "Invalid Email or Password"),
+          ).show(context),
+          (_) => {
+            // TODO: Navigate
+          },
+        ),
+      ),
       builder: (context, state) => Form(
         autovalidateMode: state.showErrorMessages
             ? AutovalidateMode.always

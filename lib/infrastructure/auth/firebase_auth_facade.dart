@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:dopagent_frontend/domain/auth/agent.dart';
 import 'package:dopagent_frontend/domain/auth/auth_failure.dart';
 import 'package:dopagent_frontend/domain/auth/i_auth_facade.dart';
-import 'package:dopagent_frontend/domain/auth/agent.dart';
 import 'package:dopagent_frontend/domain/auth/value_objects.dart';
+import 'package:dopagent_frontend/infrastructure/auth/firebase_user_mapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import 'package:dopagent_frontend/infrastructure/auth/firebase_user_mapper.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -45,6 +44,8 @@ class FirebaseAuthFacade implements IAuthFacade {
       } else {
         return left(const AuthFailure.serverError());
       }
+    } catch (e) {
+      return left(const AuthFailure.serverError());
     }
   }
 
@@ -69,6 +70,8 @@ class FirebaseAuthFacade implements IAuthFacade {
       } else {
         return left(const AuthFailure.serverError());
       }
+    } catch (e) {
+      return left(const AuthFailure.serverError());
     }
   }
 
@@ -76,7 +79,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return const Left(AuthFailure.cancelledByUser());
+      if (googleUser == null) return left(const AuthFailure.cancelledByUser());
 
       final googleAuthentication = await googleUser.authentication;
       final authCredential = GoogleAuthProvider.credential(
@@ -87,6 +90,8 @@ class FirebaseAuthFacade implements IAuthFacade {
       await _firebaseAuth.signInWithCredential(authCredential);
       return right(unit);
     } on FirebaseAuthException catch (_) {
+      return left(const AuthFailure.serverError());
+    } catch (e) {
       return left(const AuthFailure.serverError());
     }
   }

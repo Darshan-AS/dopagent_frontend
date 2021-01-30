@@ -3,8 +3,8 @@ import 'package:dopagent_frontend/domain/core/failures.dart';
 import 'package:dopagent_frontend/domain/core/value_objects.dart';
 import 'package:dopagent_frontend/domain/core/value_validators.dart';
 
-
 class Email extends ValueObject<String> {
+  @override
   final Either<ValueFailure<String>, String> value;
 
   factory Email(String email) => Email._(emailValidator(email));
@@ -13,6 +13,7 @@ class Email extends ValueObject<String> {
 }
 
 class Password extends ValueObject<String> {
+  @override
   final Either<ValueFailure<String>, String> value;
 
   factory Password(String password) => Password._(passwordValidator(password));

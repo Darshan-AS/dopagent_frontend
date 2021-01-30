@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dopagent_frontend/application/auth/auth_bloc.dart';
 import 'package:dopagent_frontend/injection.dart';
-import 'package:dopagent_frontend/presentation/routes/router.dart';
 import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
-import 'package:dopagent_frontend/presentation/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:dopagent_frontend/domain/auth/auth_failure.dart';
 import 'package:dopagent_frontend/domain/auth/agent.dart';
+import 'package:dopagent_frontend/domain/auth/auth_failure.dart';
 import 'package:dopagent_frontend/domain/auth/value_objects.dart';
 import 'package:flutter/foundation.dart';
 

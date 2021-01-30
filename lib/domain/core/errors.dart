@@ -1,4 +1,3 @@
-
 import 'package:dopagent_frontend/domain/core/failures.dart';
 
 class UnexpectedValueError extends Error {

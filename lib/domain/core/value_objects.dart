@@ -26,7 +26,7 @@ abstract class ValueObject<T> extends Equatable {
 class UniqueId extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
-  
+
   factory UniqueId() {
     return UniqueId._(right(Uuid().v1()));
   }
