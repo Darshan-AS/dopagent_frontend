@@ -14,3 +14,9 @@ Either<ValueFailure<String>, String> passwordValidator(String password) {
       ? right(password)
       : left(ValueFailure.shortPassword(invalidValue: password));
 }
+
+Either<ValueFailure<String>, String> qrCodeValidator(String qrCode) {
+  return qrCode.isNotEmpty
+      ? right(qrCode)
+      : left(ValueFailure.invalidQrCode(invalidValue: qrCode));
+}

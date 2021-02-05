@@ -12,4 +12,8 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.shortPassword({
     @required T invalidValue,
   }) = ShortPassword<T>;
+
+  const factory ValueFailure.invalidQrCode({
+    @required T invalidValue,
+  }) = InvalidQrCode<T>;
 }
