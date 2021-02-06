@@ -19,7 +19,6 @@ abstract class ScanCode implements _$ScanCode {
     @required ScanFormat format,
   }) = _ScanCode;
 
-  // ignore: unused_element
   const ScanCode._();
 
   Option<ValueFailure<dynamic>> get failureOption {

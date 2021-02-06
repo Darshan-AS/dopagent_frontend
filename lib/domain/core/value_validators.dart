@@ -20,3 +20,33 @@ Either<ValueFailure<String>, String> qrCodeValidator(String qrCode) {
       ? right(qrCode)
       : left(ValueFailure.invalidQrCode(invalidValue: qrCode));
 }
+
+Either<ValueFailure<String>, String> accountNumberValidator(
+  String accountNumber,
+) {
+  return accountNumber.isNotEmpty
+      ? right(accountNumber)
+      : left(ValueFailure.invalidAccountNumber(invalidValue: accountNumber));
+}
+
+Either<ValueFailure<String>, String> nameValidator(String name) {
+  return name.isNotEmpty
+      ? right(name)
+      : left(ValueFailure.invalidName(invalidValue: name));
+}
+
+Either<ValueFailure<DateTime>, DateTime> openingDateValidator(
+  DateTime openingDate,
+) {
+  return openingDate.isBefore(DateTime.now())
+      ? right(openingDate)
+      : left(ValueFailure.invalidOpeningDate(invalidValue: openingDate));
+}
+
+Either<ValueFailure<double>, double> denominationValidator(
+  double denomination,
+) {
+  return denomination > 0
+      ? right(denomination)
+      : left(ValueFailure.invalidDenomination(invalidValue: denomination));
+}

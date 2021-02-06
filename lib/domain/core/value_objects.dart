@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dopagent_frontend/domain/core/errors.dart';
 import 'package:dopagent_frontend/domain/core/failures.dart';
+import 'package:dopagent_frontend/domain/core/value_validators.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,6 +22,11 @@ abstract class ValueObject<T> extends Equatable {
   bool isValid() => value.isRight();
 
   T getOrThrow({e = UnexpectedValueError}) => value.fold((f) => throw e(f), id);
+
+  Either<ValueFailure<dynamic>, Unit> get getFailureOrUnit => value.fold(
+        (f) => left(f),
+        (_) => right(unit),
+      );
 }
 
 class UniqueId extends ValueObject<String> {
@@ -36,4 +42,43 @@ class UniqueId extends ValueObject<String> {
     assert(uniqueId != null);
     return UniqueId._(right(uniqueId));
   }
+}
+
+class AccountNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory AccountNumber(String accountNumber) =>
+      AccountNumber._(accountNumberValidator(accountNumber));
+
+  const AccountNumber._(this.value);
+}
+
+class OpeningDate extends ValueObject<DateTime> {
+  @override
+  final Either<ValueFailure<DateTime>, DateTime> value;
+
+  factory OpeningDate(DateTime openingDate) =>
+      OpeningDate._(openingDateValidator(openingDate));
+
+  const OpeningDate._(this.value);
+}
+
+class Name extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Name(String name) => Name._(nameValidator(name));
+
+  const Name._(this.value);
+}
+
+class Denomination extends ValueObject<double> {
+  @override
+  final Either<ValueFailure<double>, double> value;
+
+  factory Denomination(double denomination) =>
+      Denomination._(denominationValidator(denomination));
+
+  const Denomination._(this.value);
 }
