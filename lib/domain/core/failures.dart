@@ -21,9 +21,17 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
     @required T invalidValue,
   }) = InvalidAccountNumber<T>;
 
-  const factory ValueFailure.invalidName({
+  const factory ValueFailure.emptyValue({
     @required T invalidValue,
-  }) = InvalidName<T>;
+  }) = EmptyValue<T>;
+
+  const factory ValueFailure.negativeValue({
+    @required T invalidValue,
+  }) = NegativeValue<T>;
+
+  const factory ValueFailure.invalidValue({
+    @required T invalidValue,
+  }) = InvalidValue<T>;
 
   const factory ValueFailure.invalidOpeningDate({
     @required T invalidValue,

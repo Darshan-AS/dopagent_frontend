@@ -44,6 +44,26 @@ class UniqueId extends ValueObject<String> {
   }
 }
 
+class UnsignedInt extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory UnsignedInt(int intValue) =>
+      UnsignedInt._(unsignedNumValidator(intValue));
+
+  const UnsignedInt._(this.value);
+}
+
+class UnsignedDouble extends ValueObject<double> {
+  @override
+  final Either<ValueFailure<double>, double> value;
+
+  factory UnsignedDouble(double doubleValue) =>
+      UnsignedDouble._(unsignedNumValidator(doubleValue));
+
+  const UnsignedDouble._(this.value);
+}
+
 class AccountNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -54,21 +74,11 @@ class AccountNumber extends ValueObject<String> {
   const AccountNumber._(this.value);
 }
 
-class OpeningDate extends ValueObject<DateTime> {
-  @override
-  final Either<ValueFailure<DateTime>, DateTime> value;
-
-  factory OpeningDate(DateTime openingDate) =>
-      OpeningDate._(openingDateValidator(openingDate));
-
-  const OpeningDate._(this.value);
-}
-
 class Name extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory Name(String name) => Name._(nameValidator(name));
+  factory Name(String name) => Name._(notEmptyValidator(name));
 
   const Name._(this.value);
 }

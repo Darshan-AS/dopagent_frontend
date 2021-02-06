@@ -21,6 +21,23 @@ Either<ValueFailure<String>, String> qrCodeValidator(String qrCode) {
       : left(ValueFailure.invalidQrCode(invalidValue: qrCode));
 }
 
+Either<ValueFailure<String>, String> notEmptyValidator(String stringValue) {
+  return stringValue.isNotEmpty
+      ? right(stringValue)
+      : left(ValueFailure.emptyValue(invalidValue: stringValue));
+}
+
+Either<ValueFailure<T>, T> unsignedNumValidator<T>(T value) {
+  try {
+    final num numValue = value as num;
+    return numValue.isNegative
+        ? left(ValueFailure.negativeValue(invalidValue: value))
+        : right(value);
+  } catch (_) {
+    return left(ValueFailure.invalidValue(invalidValue: value));
+  }
+}
+
 Either<ValueFailure<String>, String> accountNumberValidator(
   String accountNumber,
 ) {
@@ -29,24 +46,10 @@ Either<ValueFailure<String>, String> accountNumberValidator(
       : left(ValueFailure.invalidAccountNumber(invalidValue: accountNumber));
 }
 
-Either<ValueFailure<String>, String> nameValidator(String name) {
-  return name.isNotEmpty
-      ? right(name)
-      : left(ValueFailure.invalidName(invalidValue: name));
-}
-
-Either<ValueFailure<DateTime>, DateTime> openingDateValidator(
-  DateTime openingDate,
-) {
-  return openingDate.isBefore(DateTime.now())
-      ? right(openingDate)
-      : left(ValueFailure.invalidOpeningDate(invalidValue: openingDate));
-}
-
 Either<ValueFailure<double>, double> denominationValidator(
   double denomination,
 ) {
-  return denomination > 0
+  return denomination >= 10
       ? right(denomination)
       : left(ValueFailure.invalidDenomination(invalidValue: denomination));
 }

@@ -10,7 +10,7 @@ abstract class ScanAccount implements _$ScanAccount {
   const factory ScanAccount({
     @required AccountNumber accountNumber,
     @required Name name,
-    @required OpeningDate openingDate,
+    @required DateTime openingDate,
     @required Denomination denomination,
   }) = _ScanAccount;
 
@@ -19,7 +19,6 @@ abstract class ScanAccount implements _$ScanAccount {
   Option<ValueFailure<dynamic>> get failureOption {
     return accountNumber.getFailureOrUnit
         .andThen(name.getFailureOrUnit)
-        .andThen(openingDate.getFailureOrUnit)
         .andThen(denomination.getFailureOrUnit)
         .fold((f) => some(f), (_) => none());
   }
