@@ -53,3 +53,12 @@ Either<ValueFailure<double>, double> denominationValidator(
       ? right(denomination)
       : left(ValueFailure.invalidDenomination(invalidValue: denomination));
 }
+
+Either<ValueFailure<DateTime>, DateTime> dateValidator(String dateString) {
+  try {
+    final dateTime = DateTime.parse(dateString);
+    return right(dateTime);
+  } catch (_) {
+    return left(ValueFailure.invalidDate(invalidValue: DateTime.now()));
+  }
+}

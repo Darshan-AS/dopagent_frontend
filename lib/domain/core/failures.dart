@@ -29,6 +29,10 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
     @required T invalidValue,
   }) = NegativeValue<T>;
 
+  const factory ValueFailure.invalidDate({
+    @required T invalidValue,
+  }) = InvalidDate<T>;
+
   const factory ValueFailure.invalidValue({
     @required T invalidValue,
   }) = InvalidValue<T>;

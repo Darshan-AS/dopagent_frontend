@@ -92,3 +92,12 @@ class Denomination extends ValueObject<double> {
 
   const Denomination._(this.value);
 }
+
+class Date extends ValueObject<DateTime> {
+  @override
+  final Either<ValueFailure<DateTime>, DateTime> value;
+
+  factory Date(String dateString) => Date._(dateValidator(dateString));
+
+  const Date._(this.value);
+}

@@ -37,6 +37,7 @@ dependencies:
   get_it: ^5.0.6
   google_sign_in: ^4.5.9
   injectable: ^1.0.7
+  json_annotation: ^3.1.1
   uuid: ^2.2.2
 
 dev_dependencies:
@@ -48,6 +49,7 @@ dev_dependencies:
   build_runner: ^1.11.0
   freezed: ^0.12.7
   injectable_generator: ^1.0.7
+  json_serializable: ^3.5.1
   lint: ^1.5.1
 
 # For information on the generic Dart part of this file, see the

@@ -10,12 +10,12 @@ abstract class Account implements _$Account {
   const factory Account({
     @required AccountNumber accountNumber,
     @required Name name,
-    @required DateTime openingDate,
+    @required Date openingDate,
     @required Denomination denomination,
     @required UnsignedDouble totalDepositAmount,
     @required UnsignedInt monthPaidUpto,
-    @required DateTime nextInstallmentDueDate,
-    @required DateTime dateOfLastDeposit,
+    @required Date nextInstallmentDueDate,
+    @required Date dateOfLastDeposit,
     @required UnsignedDouble rebatePaid,
     @required UnsignedDouble defaultFee,
     @required UnsignedInt defaultInstallments,
@@ -27,9 +27,12 @@ abstract class Account implements _$Account {
   Option<ValueFailure<dynamic>> get failureOption {
     return accountNumber.getFailureOrUnit
         .andThen(name.getFailureOrUnit)
+        .andThen(openingDate.getFailureOrUnit)
         .andThen(denomination.getFailureOrUnit)
         .andThen(totalDepositAmount.getFailureOrUnit)
         .andThen(monthPaidUpto.getFailureOrUnit)
+        .andThen(nextInstallmentDueDate.getFailureOrUnit)
+        .andThen(dateOfLastDeposit.getFailureOrUnit)
         .andThen(rebatePaid.getFailureOrUnit)
         .andThen(defaultFee.getFailureOrUnit)
         .andThen(defaultInstallments.getFailureOrUnit)
