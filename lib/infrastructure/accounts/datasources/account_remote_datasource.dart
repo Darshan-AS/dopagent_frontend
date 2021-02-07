@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dopagent_frontend/domain/accounts/account.dart';
-import 'package:dopagent_frontend/domain/core/value_objects.dart';
+import 'package:dopagent_frontend/domain/accounts/value_objects.dart';
 import 'package:dopagent_frontend/infrastructure/accounts/account_storage.dart';
 
 abstract class IAccountRemouteDataSource {

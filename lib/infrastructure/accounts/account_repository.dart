@@ -1,8 +1,8 @@
-import 'package:dopagent_frontend/domain/accounts/account_failure.dart';
-import 'package:dopagent_frontend/domain/accounts/account.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dopagent_frontend/domain/accounts/account.dart';
+import 'package:dopagent_frontend/domain/accounts/account_failure.dart';
 import 'package:dopagent_frontend/domain/accounts/i_account_repository.dart';
-import 'package:dopagent_frontend/domain/core/value_objects.dart';
+import 'package:dopagent_frontend/domain/accounts/value_objects.dart';
 import 'package:dopagent_frontend/infrastructure/accounts/datasources/account_local_datasource.dart';
 import 'package:dopagent_frontend/infrastructure/accounts/datasources/account_remote_datasource.dart';
 import 'package:dopagent_frontend/infrastructure/core/network_info.dart';

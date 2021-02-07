@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dopagent_frontend/domain/accounts/value_objects.dart';
 import 'package:dopagent_frontend/domain/core/failures.dart';
 import 'package:dopagent_frontend/domain/core/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
