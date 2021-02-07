@@ -33,6 +33,12 @@ Either<ValueFailure<T>, T> unsignedNumValidator<T>(T value) {
       : left(ValueFailure.negativeValue(invalidValue: value));
 }
 
+Either<ValueFailure<T>, T> positiveNumValidator<T>(T value) {
+  return value is num && value > 0
+      ? right(value)
+      : left(ValueFailure.invalidValue(invalidValue: value));
+}
+
 Either<ValueFailure<String>, String> accountNumberValidator(
   String accountNumber,
 ) {

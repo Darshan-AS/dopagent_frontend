@@ -6,10 +6,7 @@ import 'package:dopagent_frontend/domain/accounts/value_objects.dart';
 import 'package:dopagent_frontend/infrastructure/accounts/datasources/account_local_datasource.dart';
 import 'package:dopagent_frontend/infrastructure/accounts/datasources/account_remote_datasource.dart';
 import 'package:dopagent_frontend/infrastructure/core/network_info.dart';
-import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: IAccountRepository)
-@injectable
 class AccountRepository implements IAccountRepository {
   final IAccountRemouteDataSource remoteSource;
   final IAccountLocalDataSource localSource;
