@@ -28,14 +28,9 @@ Either<ValueFailure<String>, String> notEmptyValidator(String stringValue) {
 }
 
 Either<ValueFailure<T>, T> unsignedNumValidator<T>(T value) {
-  try {
-    final num numValue = value as num;
-    return numValue.isNegative
-        ? left(ValueFailure.negativeValue(invalidValue: value))
-        : right(value);
-  } catch (_) {
-    return left(ValueFailure.invalidValue(invalidValue: value));
-  }
+  return value is num && !value.isNegative
+      ? right(value)
+      : left(ValueFailure.negativeValue(invalidValue: value));
 }
 
 Either<ValueFailure<String>, String> accountNumberValidator(
