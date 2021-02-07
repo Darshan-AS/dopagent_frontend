@@ -18,6 +18,11 @@ abstract class InstallmentItem implements _$InstallmentItem {
 
   const InstallmentItem._();
 
+  factory InstallmentItem.empty() => InstallmentItem(
+        accountNumber: AccountNumber(''),
+        noOfInstallments: NoOfInstallments(1),
+      );
+
   Option<ValueFailure<dynamic>> get failureOption {
     return accountNumber.getFailureOrUnit
         .andThen(noOfInstallments.getFailureOrUnit)
