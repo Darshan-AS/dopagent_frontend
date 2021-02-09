@@ -1,5 +1,8 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:dopagent_frontend/application/auth/auth_bloc.dart';
 import 'package:dopagent_frontend/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,8 +20,10 @@ class SignInForm extends StatelessWidget {
                 emailAlreadyInUse: () => "Email already in use",
                 invalidEmailOrPassword: () => "Invalid Email or Password"),
           ).show(context),
-          (_) => {
-            // TODO: Navigate
+          (_) {
+            ExtendedNavigator.of(context)
+                .replace(Routes.installmentsListPage);
+            context.read<AuthBloc>().add(const AuthEvent.authStatusRequested());
           },
         ),
       ),
@@ -108,7 +113,7 @@ class SignInForm extends StatelessWidget {
             if (state.isSubmitting) ...[
               const SizedBox(height: 8),
               const LinearProgressIndicator(),
-          ]
+            ]
           ],
         ),
       ),

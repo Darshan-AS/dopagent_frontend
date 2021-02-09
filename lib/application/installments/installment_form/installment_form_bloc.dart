@@ -8,11 +8,13 @@ import 'package:dopagent_frontend/domain/installments/installment_failure.dart';
 import 'package:dopagent_frontend/domain/installments/installment_item.dart';
 import 'package:dopagent_frontend/domain/installments/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'installment_form_bloc.freezed.dart';
 part 'installment_form_event.dart';
 part 'installment_form_state.dart';
 
+@injectable
 class InstallmentFormBloc
     extends Bloc<InstallmentFormEvent, InstallmentFormState> {
   final IInstallmentRepository _installmentRepository;
@@ -51,7 +53,7 @@ class InstallmentFormBloc
           );
 
           saveResponse = await _installmentRepository
-              .saveInstallmentItem(state.installmentItem);
+              .addInstallmentToList(state.installmentItem);
         }
 
         yield state.copyWith(
