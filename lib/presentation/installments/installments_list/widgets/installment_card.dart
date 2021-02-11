@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dopagent_frontend/domain/installments/installment_item.dart';
+import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class InstallmentCard extends StatelessWidget {
@@ -13,5 +15,7 @@ class InstallmentCard extends StatelessWidget {
   Widget build(BuildContext context) => ListTile(
         title: Text(installment.accountNumber.getOrThrow()),
         trailing: Text(installment.noOfInstallments.getOrThrow().toString()),
+        onTap: () => ExtendedNavigator.of(context)
+            .pushInstallmentFormPage(installment: installment),
       );
 }

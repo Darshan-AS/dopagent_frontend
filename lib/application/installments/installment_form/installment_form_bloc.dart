@@ -27,6 +27,15 @@ class InstallmentFormBloc
     InstallmentFormEvent event,
   ) async* {
     yield* event.map(
+      initialize: (e) async* {
+        yield e.optionInstallment.fold(
+          () => state,
+          (installment) => state.copyWith(
+            installmentItem: installment,
+            isEditing: true,
+          ),
+        );
+      },
       accountNumberChanged: (e) async* {
         yield state.copyWith(
           installmentItem: state.installmentItem.copyWith(

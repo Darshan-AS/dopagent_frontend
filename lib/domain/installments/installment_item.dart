@@ -20,7 +20,7 @@ abstract class InstallmentItem implements _$InstallmentItem {
 
   factory InstallmentItem.empty() => InstallmentItem(
         accountNumber: AccountNumber(''),
-        noOfInstallments: NoOfInstallments(1),
+        noOfInstallments: NoOfInstallments(0),
       );
 
   Option<ValueFailure<dynamic>> get failureOption {

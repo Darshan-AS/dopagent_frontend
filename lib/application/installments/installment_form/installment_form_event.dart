@@ -2,6 +2,10 @@ part of 'installment_form_bloc.dart';
 
 @freezed
 abstract class InstallmentFormEvent with _$InstallmentFormEvent {
+  const factory InstallmentFormEvent.initialize(
+    Option<InstallmentItem> optionInstallment,
+  ) = _EditingInstallment;
+
   const factory InstallmentFormEvent.accountNumberChanged(
     String accountNumber,
   ) = _AccountNumberChanged;

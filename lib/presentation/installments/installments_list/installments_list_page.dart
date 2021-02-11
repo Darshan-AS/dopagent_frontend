@@ -52,7 +52,8 @@ class InstallmentsListPage extends StatelessWidget {
           ),
           body: InstallmentsListBody(),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => ExtendedNavigator.of(context)
+                .pushInstallmentFormPage(installment: null),
             child: const Icon(Icons.add),
           ),
         ),
