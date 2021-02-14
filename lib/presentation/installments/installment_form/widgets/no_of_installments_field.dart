@@ -24,10 +24,12 @@ class NoOfInstallmentsField extends HookWidget {
           decoration: const InputDecoration(
             labelText: 'No. of Installments',
           ),
+          keyboardType: TextInputType.number,
+          // initialValue: '1',
+          autocorrect: false,
           onChanged: (noOfInstallments) => context
               .read<InstallmentFormBloc>()
-              .add(InstallmentFormEvent.noOfInstallmentsChanged(
-                  int.parse(noOfInstallments))),
+              .add(InstallmentFormEvent.noOfInstallmentsChanged(noOfInstallments)),
           validator: (_) => context
               .read<InstallmentFormBloc>()
               .state

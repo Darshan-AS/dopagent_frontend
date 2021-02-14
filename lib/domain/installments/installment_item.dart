@@ -10,6 +10,7 @@ part 'installment_item.freezed.dart';
 @freezed
 abstract class InstallmentItem implements _$InstallmentItem {
   const factory InstallmentItem({
+    @required UniqueId id,
     @required AccountNumber accountNumber,
     @required NoOfInstallments noOfInstallments,
     Date openingDate,
@@ -19,6 +20,7 @@ abstract class InstallmentItem implements _$InstallmentItem {
   const InstallmentItem._();
 
   factory InstallmentItem.empty() => InstallmentItem(
+        id: UniqueId(),
         accountNumber: AccountNumber(''),
         noOfInstallments: NoOfInstallments(0),
       );

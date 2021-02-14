@@ -46,6 +46,7 @@ class SignInForm extends StatelessWidget {
                 labelText: 'Email',
               ),
               autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
               onChanged: (value) => context
                   .read<SignInFormBloc>()
                   .add(SignInFormEvent.emailChanged(value)),

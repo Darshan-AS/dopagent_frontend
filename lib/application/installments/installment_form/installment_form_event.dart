@@ -11,7 +11,7 @@ abstract class InstallmentFormEvent with _$InstallmentFormEvent {
   ) = _AccountNumberChanged;
 
   const factory InstallmentFormEvent.noOfInstallmentsChanged(
-    int noOfInstallments,
+    String noOfInstallments,
   ) = _NoOfInstallmentsChanged;
 
   const factory InstallmentFormEvent.saved() = _Saved;

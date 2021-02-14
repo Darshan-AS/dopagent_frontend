@@ -24,6 +24,8 @@ class AccountNumberField extends HookWidget {
           decoration: const InputDecoration(
             labelText: 'Account Number',
           ),
+          autofocus: true,
+          autocorrect: false,
           onChanged: (accountNumber) => context
               .read<InstallmentFormBloc>()
               .add(InstallmentFormEvent.accountNumberChanged(accountNumber)),

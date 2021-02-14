@@ -18,7 +18,7 @@ class InstallmentsRepository implements IInstallmentRepository {
   ) async {
     final installmentsListBox = await Hive.openBox('installments_list');
     await installmentsListBox.put(
-      installmentItem.accountNumber.getOrThrow(),
+      installmentItem.id.getOrThrow(),
       InstallmentStorage.fromDomain(installmentItem),
     );
     return right(unit);
@@ -30,7 +30,7 @@ class InstallmentsRepository implements IInstallmentRepository {
   ) async {
     final installmentsListBox = await Hive.openBox('installments_list');
     await installmentsListBox.put(
-      installmentItem.accountNumber.getOrThrow(),
+      installmentItem.id.getOrThrow(),
       InstallmentStorage.fromDomain(installmentItem),
     );
     return right(unit);
@@ -40,7 +40,7 @@ class InstallmentsRepository implements IInstallmentRepository {
   Stream<Either<InstallmentFailure, IList<InstallmentItem>>>
       watchInstallmentsList() async* {
     final installmentsListBox = await Hive.openBox('installments_list');
-
+    print(installmentsListBox.values.toList().cast<InstallmentStorage>());
     try {
       yield right(IList.from(installmentsListBox.values
           .cast<InstallmentStorage>()

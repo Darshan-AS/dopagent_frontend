@@ -47,7 +47,9 @@ class InstallmentFormBloc
       noOfInstallmentsChanged: (e) async* {
         yield state.copyWith(
           installmentItem: state.installmentItem.copyWith(
-            noOfInstallments: NoOfInstallments(e.noOfInstallments),
+            noOfInstallments: NoOfInstallments(
+              int.tryParse(e.noOfInstallments) ?? 0,
+            ),
           ),
           submitResponseOption: none(),
         );
