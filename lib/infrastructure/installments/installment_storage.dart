@@ -2,16 +2,18 @@ import 'package:dopagent_frontend/domain/accounts/value_objects.dart';
 import 'package:dopagent_frontend/domain/installments/installment_item.dart';
 import 'package:dopagent_frontend/domain/installments/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'installment_storage.freezed.dart';
 part 'installment_storage.g.dart';
 
 @freezed
 abstract class InstallmentStorage implements _$InstallmentStorage {
+  @HiveType(typeId: 1)
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory InstallmentStorage({
-    @required @JsonKey(name: 'account_no') String accountNumber,
-    @required int noOfInstallments,
+    @required @JsonKey(name: 'account_no') @HiveField(0) String accountNumber,
+    @required @HiveField(1) int noOfInstallments,
   }) = _InstallmentStorage;
 
   const InstallmentStorage._();

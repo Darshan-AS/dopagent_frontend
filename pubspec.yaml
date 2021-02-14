@@ -36,6 +36,8 @@ dependencies:
   freezed_annotation: ^0.12.0
   get_it: ^5.0.6
   google_sign_in: ^4.5.9
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
   injectable: ^1.0.7
   json_annotation: ^3.1.1
   uuid: ^2.2.2
@@ -43,11 +45,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  integration_test:
-    sdk: flutter
+  # integration_test:
+  #   sdk: flutter
   auto_route_generator: ^0.6.10
   build_runner: ^1.11.0
   freezed: ^0.12.7
+  hive_generator: ^0.8.2
   injectable_generator: ^1.0.7
   json_serializable: ^3.5.1
   lint: ^1.5.1

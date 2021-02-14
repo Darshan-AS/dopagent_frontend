@@ -7,8 +7,11 @@ abstract class IInstallmentRepository {
     InstallmentItem installmentItem,
   );
 
-  Future<Either<InstallmentFailure, IList<InstallmentItem>>>
-      getInstallmentsList();
+  Future<Either<InstallmentFailure, Unit>> updateInstallmentToList(
+    InstallmentItem installmentItem,
+  );
+
+  Stream<Either<InstallmentFailure, IList<InstallmentItem>>> watchInstallmentsList();
 
   Future<Either<InstallmentFailure, String>> submitInstallmentsList(
       IList<InstallmentItem> installments);

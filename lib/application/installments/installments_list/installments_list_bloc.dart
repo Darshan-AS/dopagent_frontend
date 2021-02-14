@@ -25,16 +25,7 @@ class InstallmentsListBloc
     InstallmentsListEvent event,
   ) async* {
     yield* event.map(
-      fetchedInstallmentsList: (_) async* {
-        yield const InstallmentsListState.loadInProgress();
-        final eitherInstallmentsList =
-            await _installmentRepository.getInstallmentsList();
-        yield eitherInstallmentsList.fold(
-          (f) => InstallmentsListState.loadFailure(f),
-          (installmentsList) =>
-              InstallmentsListState.loadSuccess(installmentsList),
-        );
-      },
+      fetchedInstallmentsList: (_) async* {},
       // TODO: Implement this
       deletedInstallment: (_) async* {},
       submittedInstallmentsList: (_) async* {},

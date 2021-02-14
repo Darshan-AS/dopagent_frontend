@@ -61,8 +61,11 @@ class InstallmentFormBloc
             submitResponseOption: none(),
           );
 
-          saveResponse = await _installmentRepository
-              .addInstallmentToList(state.installmentItem);
+          saveResponse = state.isEditing
+              ? await _installmentRepository
+                  .updateInstallmentToList(state.installmentItem)
+              : await _installmentRepository
+                  .addInstallmentToList(state.installmentItem);
         }
 
         yield state.copyWith(
