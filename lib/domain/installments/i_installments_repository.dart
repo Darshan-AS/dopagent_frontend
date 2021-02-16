@@ -11,6 +11,10 @@ abstract class IInstallmentRepository {
     InstallmentItem installmentItem,
   );
 
+  Future<Either<InstallmentFailure, Unit>> deleteInstallmentFromList(
+    InstallmentItem installmentItem,
+  );
+
   Stream<Either<InstallmentFailure, IList<InstallmentItem>>> watchInstallmentsList();
 
   Future<Either<InstallmentFailure, String>> submitInstallmentsList(

@@ -37,10 +37,18 @@ class InstallmentsRepository implements IInstallmentRepository {
   }
 
   @override
+  Future<Either<InstallmentFailure, Unit>> deleteInstallmentFromList(
+    InstallmentItem installmentItem,
+  ) async {
+    final installmentsListBox = await Hive.openBox('installments_list');
+    await installmentsListBox.delete(installmentItem.id.getOrThrow());
+    return right(unit);
+  }
+
+  @override
   Stream<Either<InstallmentFailure, IList<InstallmentItem>>>
       watchInstallmentsList() async* {
     final installmentsListBox = await Hive.openBox('installments_list');
-    print(installmentsListBox.values.toList().cast<InstallmentStorage>());
     try {
       yield right(IList.from(installmentsListBox.values
           .cast<InstallmentStorage>()

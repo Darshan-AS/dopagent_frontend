@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -74,6 +75,26 @@ class InstallmentFormBloc
           isSaving: false,
           showErrorMessages: true,
           submitResponseOption: optionOf(saveResponse),
+        );
+      },
+      deleted: (e) async* {
+        Either<InstallmentFailure, Unit> deleteResponse;
+
+        // TODO: Maybe add isDeleting instead of isSaving
+        yield state.copyWith(
+          isSaving: true,
+          submitResponseOption: none(),
+        );
+
+        deleteResponse = state.isEditing
+            ? await _installmentRepository
+                .deleteInstallmentFromList(state.installmentItem)
+            : right(unit);
+
+        yield state.copyWith(
+          isSaving: false,
+          showErrorMessages: false,
+          submitResponseOption: optionOf(deleteResponse),
         );
       },
     );

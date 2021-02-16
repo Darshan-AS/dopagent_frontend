@@ -15,4 +15,6 @@ abstract class InstallmentFormEvent with _$InstallmentFormEvent {
   ) = _NoOfInstallmentsChanged;
 
   const factory InstallmentFormEvent.saved() = _Saved;
+
+  const factory InstallmentFormEvent.deleted() = _Deleted;
 }

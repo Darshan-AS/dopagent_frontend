@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dopagent_frontend/application/installments/installment_form/installment_form_bloc.dart';
+import 'package:dopagent_frontend/application/installments/installments_actor/installments_actor_bloc.dart';
 import 'package:dopagent_frontend/domain/installments/installment_item.dart';
 import 'package:dopagent_frontend/injection.dart';
 import 'package:dopagent_frontend/presentation/installments/installment_form/widgets/account_number_field.dart';
@@ -105,6 +106,17 @@ class InstallmentFormPageScaffold extends StatelessWidget {
           ),
         ),
         actions: [
+          BlocBuilder<InstallmentFormBloc, InstallmentFormState>(
+            buildWhen: (prevState, currState) =>
+                prevState.isEditing != currState.isEditing,
+            builder: (context, state) => state.isEditing
+                ? IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () => context.read<InstallmentFormBloc>().add(
+                        InstallmentFormEvent.deleted()),
+                  )
+                : Container(),
+          ),
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () => context

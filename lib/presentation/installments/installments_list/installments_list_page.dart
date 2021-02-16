@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dopagent_frontend/application/auth/auth_bloc.dart';
 import 'package:dopagent_frontend/application/installments/installment_form/installment_form_bloc.dart';
-import 'package:dopagent_frontend/application/installments/installments_list/installments_list_bloc.dart';
+import 'package:dopagent_frontend/application/installments/installments_actor/installments_actor_bloc.dart';
 import 'package:dopagent_frontend/application/installments/installments_watcher/installments_watcher_bloc.dart';
 import 'package:dopagent_frontend/injection.dart';
 import 'package:dopagent_frontend/presentation/installments/installments_list/widgets/installments_list_body.dart';
@@ -19,6 +19,9 @@ class InstallmentsListPage extends StatelessWidget {
         BlocProvider<InstallmentsWatcherBloc>(
           create: (context) => getIt<InstallmentsWatcherBloc>()
             ..add(const InstallmentsWatcherEvent.watchAll()),
+        ),
+        BlocProvider<InstallmentsActorBloc>(
+          create: (context) => getIt<InstallmentsActorBloc>(),
         ),
         BlocProvider<InstallmentFormBloc>(
           create: (context) => getIt<InstallmentFormBloc>(),
