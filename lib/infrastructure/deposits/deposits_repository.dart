@@ -46,8 +46,7 @@ class DepositsRepository implements IDepositsRepository {
   }
 
   @override
-  Stream<Either<DepositFailure, IList<Deposit>>>
-      watchAll() async* {
+  Stream<Either<DepositFailure, IList<Deposit>>> watchAll() async* {
     final depositsListBox = await Hive.openBox('deposits_list');
     try {
       yield right(IList.from(depositsListBox.values
@@ -66,12 +65,5 @@ class DepositsRepository implements IDepositsRepository {
         return left(const DepositFailure.unexpected());
       }
     });
-  }
-
-  @override
-  Future<Either<DepositFailure, String>> submitDeposits(
-      IList<Deposit> deposits) async {
-    // TODO: implement submitDeposits
-    throw UnimplementedError();
   }
 }

@@ -16,8 +16,4 @@ abstract class IDepositsRepository {
   );
 
   Stream<Either<DepositFailure, IList<Deposit>>> watchAll();
-
-  Future<Either<DepositFailure, String>> submitDeposits(
-    IList<Deposit> deposits,
-  );
 }
