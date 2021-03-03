@@ -19,7 +19,7 @@ class AppWidget extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         home:
-            Container(), // TODO: Temp solution to avoid key issu in ExtendedNavigator
+            Container(), // TODO: Temp solution to avoid key issue in ExtendedNavigator
         builder: ExtendedNavigator.builder<AutoRouter>(
           router: AutoRouter(),
         ),

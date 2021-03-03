@@ -46,10 +46,10 @@ class DepositsRepository implements IDepositsRepository {
   }
 
   @override
-  Stream<Either<DepositFailure, IList<Deposit>>> watchAll() async* {
+  Stream<Either<DepositFailure, IVector<Deposit>>> watchAll() async* {
     final depositsListBox = await Hive.openBox('deposits_list');
     try {
-      yield right(IList.from(depositsListBox.values
+      yield right(IVector.from(depositsListBox.values
           .cast<DepositStorage>()
           .map((deposit) => deposit.toDomain())));
     } catch (_) {
@@ -58,7 +58,7 @@ class DepositsRepository implements IDepositsRepository {
 
     yield* depositsListBox.watch().map((_) {
       try {
-        return right(IList.from(depositsListBox.values
+        return right(IVector.from(depositsListBox.values
             .cast<DepositStorage>()
             .map((deposit) => deposit.toDomain())));
       } catch (_) {

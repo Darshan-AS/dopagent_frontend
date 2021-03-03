@@ -15,5 +15,5 @@ abstract class IDepositsRepository {
     Deposit deposit,
   );
 
-  Stream<Either<DepositFailure, IList<Deposit>>> watchAll();
+  Stream<Either<DepositFailure, IVector<Deposit>>> watchAll();
 }

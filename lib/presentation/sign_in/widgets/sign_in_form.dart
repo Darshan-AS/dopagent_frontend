@@ -22,7 +22,7 @@ class SignInForm extends StatelessWidget {
           ).show(context),
           (_) {
             ExtendedNavigator.of(context)
-                .replace(Routes.depositsListPage);
+                .replace(Routes.ordersListPage);
             context.read<AuthBloc>().add(const AuthEvent.authStatusRequested());
           },
         ),

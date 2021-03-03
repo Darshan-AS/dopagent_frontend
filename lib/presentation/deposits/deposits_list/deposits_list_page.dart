@@ -57,7 +57,7 @@ class DepositsListPage extends StatelessWidget {
           body: DepositsListBody(),
           floatingActionButton: FloatingActionButton(
             onPressed: () => ExtendedNavigator.of(context)
-                .pushDepositFormPage(deposit: null),
+                .pushDepositFormPage(deposit: null, orderFormBloc: null),
             child: const Icon(Icons.add),
           ),
         ),

@@ -32,7 +32,7 @@ class DepositCard extends StatelessWidget {
           title: Text(deposit.accountNumber.getOrThrow()),
           trailing: Text(deposit.noOfInstallments.getOrThrow().toString()),
           onTap: () => ExtendedNavigator.of(context)
-              .pushDepositFormPage(deposit: deposit),
+              .pushDepositFormPage(deposit: deposit, orderFormBloc: null),
         ),
       );
 }

@@ -11,7 +11,7 @@ class SplashPage extends StatelessWidget {
       listener: (context, state) => state.when(
         initial: () => null,
         authenticated: () => ExtendedNavigator.of(context)
-            .replace(Routes.depositsListPage),
+            .replace(Routes.ordersListPage),
         unauthenticated: () =>
             ExtendedNavigator.of(context).replace(Routes.signInPage),
       ),

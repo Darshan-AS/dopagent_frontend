@@ -25,6 +25,12 @@ abstract class Deposit implements _$Deposit {
         noOfInstallments: NoOfInstallments(0),
       );
 
+  Either<ValueFailure<dynamic>, double> get amount => Either.map2(
+        denomination.value,
+        noOfInstallments.value,
+        (double d, int n) => d * n.toDouble(),
+      );
+
   Option<ValueFailure<dynamic>> get failureOption {
     return accountNumber.getFailureOrUnit
         .andThen(noOfInstallments.getFailureOrUnit)

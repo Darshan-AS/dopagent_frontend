@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dopagent_frontend/application/deposits/deposit_form/deposit_form_bloc.dart';
+import 'package:dopagent_frontend/application/orders/order_form/order_form_bloc.dart';
 import 'package:dopagent_frontend/domain/deposits/deposit.dart';
 import 'package:dopagent_frontend/injection.dart';
 import 'package:dopagent_frontend/presentation/deposits/deposit_form/widgets/account_number_field.dart';
@@ -10,13 +11,23 @@ import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DepositFormPage extends StatelessWidget {
+class DepositFormPage extends StatelessWidget implements AutoRouteWrapper {
   final Deposit deposit;
+  final OrderFormBloc orderFormBloc;
 
   const DepositFormPage({
     Key key,
     @required this.deposit,
+    @required this.orderFormBloc,
   }) : super(key: key);
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider<OrderFormBloc>.value(
+      value: orderFormBloc,
+      child: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) => BlocProvider(
@@ -33,9 +44,14 @@ class DepositFormPage extends StatelessWidget {
                   unexpected: (_) => 'Unexpected Error',
                 ),
               ).show(context),
-              (_) => ExtendedNavigator.of(context).popUntil(
-                (route) => route.settings.name == Routes.depositsListPage,
-              ),
+              (_) {
+                context
+                    .read<OrderFormBloc>()
+                    .add(OrderFormEvent.addDeposit(state.deposit));
+                ExtendedNavigator.of(context).popUntil(
+                  (route) => route.settings.name == Routes.orderFormPage,
+                );
+              },
             ),
           ),
           buildWhen: (prevState, currState) =>

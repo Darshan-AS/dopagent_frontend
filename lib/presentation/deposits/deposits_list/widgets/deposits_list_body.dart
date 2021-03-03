@@ -12,25 +12,13 @@ class DepositsListBody extends StatelessWidget {
           initial: (_) =>
               Container(color: Colors.yellow, width: 200, height: 100),
           loading: (_) => const Center(child: CircularProgressIndicator()),
-          loadSuccess: (state) {
-            final depositsList = state.deposits.toList();
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final deposit = depositsList[index];
-                return DepositCard(deposit: deposit);
-              },
-              itemCount: depositsList.length,
-            );
-            // return ImplicitlyAnimatedList<Deposit>(
-            //   areItemsTheSame: (oldItem, newItem) => oldItem.id == newItem.id,
-            //   itemBuilder: (context, animation, item, index) {
-            //     final deposit = deposits[index];
-            //     return DepositCard(deposit: deposit);
-            //   },
-            //   items: deposits,
-            //   removeDuration: const Duration(),
-            // );
-          },
+          loadSuccess: (state) => ListView.builder(
+            itemBuilder: (context, index) => state.deposits.get(index).fold(
+                  () => Container(color: Colors.red, width: 200, height: 100),
+                  (deposit) => DepositCard(deposit: deposit),
+                ),
+            itemCount: state.deposits.length(),
+          ),
           loadFailure: (_) =>
               Container(color: Colors.red, width: 200, height: 100),
         );

@@ -7,7 +7,7 @@ abstract class DepositsWatcherState with _$DepositsWatcherState {
   const factory DepositsWatcherState.loading() = _Loading;
 
   const factory DepositsWatcherState.loadSuccess(
-    IList<Deposit> deposits,
+    IVector<Deposit> deposits,
   ) = _LoadSuccess;
 
   const factory DepositsWatcherState.loadFailure(
