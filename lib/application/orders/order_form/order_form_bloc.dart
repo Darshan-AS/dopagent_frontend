@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide Order;
 import 'package:dopagent_frontend/domain/deposits/deposit.dart';
-import 'package:dopagent_frontend/domain/deposits/i_orders_repository.dart';
-import 'package:dopagent_frontend/domain/deposits/order.dart';
+import 'package:dopagent_frontend/domain/orders/i_orders_repository.dart';
+import 'package:dopagent_frontend/domain/orders/order.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

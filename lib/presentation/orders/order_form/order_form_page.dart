@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dopagent_frontend/application/orders/order_form/order_form_bloc.dart';
-import 'package:dopagent_frontend/domain/deposits/order.dart';
+import 'package:dopagent_frontend/domain/orders/order.dart';
 import 'package:dopagent_frontend/injection.dart';
 import 'package:dopagent_frontend/presentation/deposits/deposits_list/widgets/deposit_card.dart';
 import 'package:flutter/material.dart';
