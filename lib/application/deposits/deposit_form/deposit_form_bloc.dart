@@ -14,12 +14,14 @@ part 'deposit_form_bloc.freezed.dart';
 part 'deposit_form_event.dart';
 part 'deposit_form_state.dart';
 
-@injectable
 class DepositFormBloc extends Bloc<DepositFormEvent, DepositFormState> {
-  final IDepositsRepository _depositsRepository;
+  final void Function(Deposit) onDepositSaved;
+  final void Function(Deposit) onDepositDeleted;
 
-  DepositFormBloc(this._depositsRepository)
-      : super(DepositFormState.initial());
+  DepositFormBloc({
+    @required this.onDepositSaved,
+    this.onDepositDeleted,
+  }) : super(DepositFormState.initial());
 
   @override
   Stream<DepositFormState> mapEventToState(
@@ -54,45 +56,39 @@ class DepositFormBloc extends Bloc<DepositFormEvent, DepositFormState> {
         );
       },
       saved: (e) async* {
-        Either<DepositFailure, Unit> saveResponse;
-
         if (state.deposit.failureOption.isNone()) {
           yield state.copyWith(
             isSaving: true,
             submitResponseOption: none(),
           );
 
-          saveResponse = state.isEditing
-              ? await _depositsRepository
-                  .update(state.deposit)
-              : await _depositsRepository
-                  .add(state.deposit);
+          onDepositSaved(state.deposit);
+
+          yield state.copyWith(
+            isSaving: false,
+            submitResponseOption: some(right(unit)), // TODO: Rework this field
+          );
         }
 
         yield state.copyWith(
           isSaving: false,
           showErrorMessages: true,
-          submitResponseOption: optionOf(saveResponse),
+          submitResponseOption: none(),
         );
       },
       deleted: (e) async* {
-        Either<DepositFailure, Unit> deleteResponse;
-
         // TODO: Maybe add isDeleting instead of isSaving
         yield state.copyWith(
           isSaving: true,
           submitResponseOption: none(),
         );
 
-        deleteResponse = state.isEditing
-            ? await _depositsRepository
-                .delete(state.deposit)
-            : right(unit);
+        onDepositDeleted(state.deposit);
 
         yield state.copyWith(
           isSaving: false,
           showErrorMessages: false,
-          submitResponseOption: optionOf(deleteResponse),
+          submitResponseOption: some(right(unit)),
         );
       },
     );

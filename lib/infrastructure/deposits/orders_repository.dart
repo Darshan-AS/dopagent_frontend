@@ -5,7 +5,7 @@ import 'package:dopagent_frontend/domain/orders/order.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IOrdersRepository)
-class DepositsRepository implements IOrdersRepository {
+class OrdersRepository implements IOrdersRepository {
   @override
   Future<Either<OrderFailure, Unit>> create(Order order) async {
     // TODO: implement create

@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dopagent_frontend/application/orders/order_form/order_form_bloc.dart';
+import 'package:dopagent_frontend/domain/deposits/deposit.dart';
 import 'package:dopagent_frontend/domain/orders/order.dart';
 import 'package:dopagent_frontend/injection.dart';
 import 'package:dopagent_frontend/presentation/deposits/deposits_list/widgets/deposit_card.dart';
-import 'package:flutter/material.dart';
 import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderFormPage extends StatelessWidget {
@@ -32,30 +33,32 @@ class OrderFormPageScaffold extends StatelessWidget {
       appBar: AppBar(title: const Text('order_123')),
       body: BlocBuilder<OrderFormBloc, OrderFormState>(
         builder: (context, state) {
-          return Form(
-            child: Column(
-              children: [
-                Text(state.order.id.getOrThrow()),
-                ListView.builder(
-                  shrinkWrap: true, // TODO: Access performance impact
-                  itemBuilder: (context, index) =>
-                      state.order.deposits.get(index).fold(
-                            () => Container(
-                                color: Colors.red, width: 200, height: 100),
-                            (deposit) => DepositCard(deposit: deposit),
-                          ),
-                  itemCount: state.order.length,
-                ),
-              ],
-            ),
+          return Column(
+            children: [
+              Text(state.order.id.getOrThrow()),
+              ListView.builder(
+                shrinkWrap: true, // TODO: Access performance impact
+                itemBuilder: (context, index) => state.order.deposits
+                    .get(index)
+                    .fold(
+                      () =>
+                          Container(color: Colors.red, width: 200, height: 100),
+                      (deposit) => DepositCard(deposit: deposit),
+                    ),
+                itemCount: state.order.length,
+              ),
+              // DepositsListBody(),
+            ],
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => ExtendedNavigator.of(context).pushDepositFormPage(
-            deposit: null,
-            orderFormBloc: context.read<OrderFormBloc>(),
-          ),
+          deposit: null,
+          onDepositSaved: (Deposit deposit) => context
+              .read<OrderFormBloc>()
+              .add(OrderFormEvent.addDeposit(deposit)),
+        ),
         child: const Icon(Icons.add),
       ),
     );

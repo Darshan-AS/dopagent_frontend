@@ -2,37 +2,31 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dopagent_frontend/application/deposits/deposit_form/deposit_form_bloc.dart';
-import 'package:dopagent_frontend/application/orders/order_form/order_form_bloc.dart';
 import 'package:dopagent_frontend/domain/deposits/deposit.dart';
-import 'package:dopagent_frontend/injection.dart';
 import 'package:dopagent_frontend/presentation/deposits/deposit_form/widgets/account_number_field.dart';
 import 'package:dopagent_frontend/presentation/deposits/deposit_form/widgets/no_of_installments_field.dart';
 import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DepositFormPage extends StatelessWidget implements AutoRouteWrapper {
+class DepositFormPage extends StatelessWidget {
   final Deposit deposit;
-  final OrderFormBloc orderFormBloc;
+  final void Function(Deposit) onDepositSaved;
+  final void Function(Deposit) onDepositDeleted;
 
   const DepositFormPage({
     Key key,
     @required this.deposit,
-    @required this.orderFormBloc,
+    @required this.onDepositSaved,
+    this.onDepositDeleted,
   }) : super(key: key);
 
   @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider<OrderFormBloc>.value(
-      value: orderFormBloc,
-      child: this,
-    );
-  }
-
-  @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (context) => getIt<DepositFormBloc>()
-          ..add(DepositFormEvent.initialize(optionOf(deposit))),
+        create: (context) => DepositFormBloc(
+          onDepositSaved: onDepositSaved,
+          onDepositDeleted: onDepositDeleted,
+        )..add(DepositFormEvent.initialize(optionOf(deposit))),
         child: BlocConsumer<DepositFormBloc, DepositFormState>(
           listenWhen: (prevState, currState) =>
               prevState.submitResponseOption != currState.submitResponseOption,
@@ -45,9 +39,6 @@ class DepositFormPage extends StatelessWidget implements AutoRouteWrapper {
                 ),
               ).show(context),
               (_) {
-                context
-                    .read<OrderFormBloc>()
-                    .add(OrderFormEvent.addDeposit(state.deposit));
                 ExtendedNavigator.of(context).popUntil(
                   (route) => route.settings.name == Routes.orderFormPage,
                 );

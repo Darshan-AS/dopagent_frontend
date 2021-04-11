@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dopagent_frontend/application/deposits/deposits_actor/deposits_actor_bloc.dart';
+import 'package:dopagent_frontend/application/orders/order_form/order_form_bloc.dart';
 import 'package:dopagent_frontend/domain/deposits/deposit.dart';
 import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +32,15 @@ class DepositCard extends StatelessWidget {
         child: ListTile(
           title: Text(deposit.accountNumber.getOrThrow()),
           trailing: Text(deposit.noOfInstallments.getOrThrow().toString()),
-          onTap: () => ExtendedNavigator.of(context)
-              .pushDepositFormPage(deposit: deposit, orderFormBloc: null),
+          onTap: () => ExtendedNavigator.of(context).pushDepositFormPage(
+            deposit: deposit,
+            onDepositSaved: (Deposit deposit) => context
+                .read<OrderFormBloc>()
+                .add(OrderFormEvent.updateDeposit(deposit)),
+            onDepositDeleted: (Deposit deposit) => context
+                .read<OrderFormBloc>()
+                .add(OrderFormEvent.removeDeposit(deposit)),
+          ),
         ),
       );
 }
