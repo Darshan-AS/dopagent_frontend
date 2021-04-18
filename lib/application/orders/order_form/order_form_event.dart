@@ -12,4 +12,6 @@ abstract class OrderFormEvent with _$OrderFormEvent {
   const factory OrderFormEvent.removeDeposit(Deposit deposit) = _RemoveDeposit;
 
   const factory OrderFormEvent.orderPlaced() = _OrderPlaced;
+
+  const factory OrderFormEvent.orderDeleted() = _OrderDeleted;
 }

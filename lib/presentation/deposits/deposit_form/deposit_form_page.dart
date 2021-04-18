@@ -120,7 +120,7 @@ class DepositFormPageScaffold extends StatelessWidget {
                     icon: const Icon(Icons.delete),
                     onPressed: () => context
                         .read<DepositFormBloc>()
-                        .add(DepositFormEvent.deleted()),
+                        .add(const DepositFormEvent.deleted()),
                   )
                 : Container(),
           ),

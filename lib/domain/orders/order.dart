@@ -5,6 +5,7 @@ import 'package:dopagent_frontend/domain/deposits/deposit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order.freezed.dart';
+part 'order.g.dart';
 
 @freezed
 abstract class OrderStatus implements _$OrderStatus {
@@ -15,6 +16,18 @@ abstract class OrderStatus implements _$OrderStatus {
   const factory OrderStatus.success() = _Success;
 
   const factory OrderStatus.failure() = _Failure;
+
+  const OrderStatus._();
+
+  factory OrderStatus.fromJson(Map<String, dynamic> json) =>
+      _$OrderStatusFromJson(json);
+
+  factory OrderStatus.fromJsonString(String stringOrderStatus) =>
+      OrderStatus.fromJson({
+        'runtimeType': stringOrderStatus,
+      });
+
+  String toJsonString() => toJson()['runtimeType'] as String;
 }
 
 @freezed

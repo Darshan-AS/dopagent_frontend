@@ -5,10 +5,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dopagent_frontend/domain/accounts/value_objects.dart';
 import 'package:dopagent_frontend/domain/deposits/deposit.dart';
 import 'package:dopagent_frontend/domain/deposits/deposit_failure.dart';
-import 'package:dopagent_frontend/domain/deposits/i_deposit_repository.dart';
 import 'package:dopagent_frontend/domain/deposits/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
 
 part 'deposit_form_bloc.freezed.dart';
 part 'deposit_form_event.dart';
