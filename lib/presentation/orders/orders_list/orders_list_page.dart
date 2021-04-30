@@ -26,28 +26,39 @@ class OrdersListPage extends StatelessWidget {
             orElse: () {},
           );
         },
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Orders'),
-            leading: IconButton(
-              icon: const Icon(Icons.exit_to_app),
-              onPressed: () =>
-                  context.read<AuthBloc>().add(const AuthEvent.signedOut()),
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.check),
-                onPressed: () {},
-              )
-            ],
-          ),
-          body: OrdersListBody(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () =>
-                ExtendedNavigator.of(context).pushOrderFormPage(order: null),
-            child: const Icon(Icons.add),
-          ),
+        child: const OrdersListScaffold(),
+      ),
+    );
+  }
+}
+
+class OrdersListScaffold extends StatelessWidget {
+  const OrdersListScaffold({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Orders'),
+        leading: IconButton(
+          icon: const Icon(Icons.exit_to_app),
+          onPressed: () =>
+              context.read<AuthBloc>().add(const AuthEvent.signedOut()),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.check),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: OrdersListBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =>
+            ExtendedNavigator.of(context).pushOrderFormPage(order: null),
+        child: const Icon(Icons.add),
       ),
     );
   }
