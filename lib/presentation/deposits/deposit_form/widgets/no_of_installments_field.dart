@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class NoOfInstallmentsField extends HookWidget {
-  const NoOfInstallmentsField({Key key}) : super(key: key);
+  const NoOfInstallmentsField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

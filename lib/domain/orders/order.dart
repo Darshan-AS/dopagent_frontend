@@ -8,7 +8,7 @@ part 'order.freezed.dart';
 part 'order.g.dart';
 
 @freezed
-abstract class OrderStatus implements _$OrderStatus {
+class OrderStatus with _$OrderStatus {
   const factory OrderStatus.draft() = _Draft;
 
   const factory OrderStatus.pending() = _Pending;
@@ -31,12 +31,12 @@ abstract class OrderStatus implements _$OrderStatus {
 }
 
 @freezed
-abstract class Order implements _$Order {
+class Order with _$Order {
   const factory Order({
-    @required UniqueId id,
-    @required OrderStatus status,
-    @required IVector<Deposit> deposits,
-    String referenceId,
+    required UniqueId id,
+    required OrderStatus status,
+    required IVector<Deposit> deposits,
+    String? referenceId,
   }) = _Order;
 
   const Order._();

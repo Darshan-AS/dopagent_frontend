@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class AccountNumberField extends HookWidget {
-  const AccountNumberField({Key key}) : super(key: key);
+  const AccountNumberField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

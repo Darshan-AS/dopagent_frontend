@@ -9,13 +9,13 @@ part 'deposit_storage.freezed.dart';
 part 'deposit_storage.g.dart';
 
 @freezed
-abstract class DepositStorage implements _$DepositStorage {
+class DepositStorage with _$DepositStorage {
   @HiveType(typeId: 1)
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory DepositStorage({
-    @JsonKey(ignore: true) @HiveField(0) String id,
-    @required @JsonKey(name: 'account_no') @HiveField(1) String accountNumber,
-    @required @HiveField(2) int noOfInstallments,
+    @JsonKey(ignore: true) @HiveField(0) String? id,
+    @JsonKey(name: 'account_no') @HiveField(1) required String accountNumber,
+    @HiveField(2) required int noOfInstallments,
   }) = _DepositStorage;
 
   const DepositStorage._();

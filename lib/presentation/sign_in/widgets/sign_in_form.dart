@@ -21,8 +21,7 @@ class SignInForm extends StatelessWidget {
                 invalidEmailOrPassword: () => "Invalid Email or Password"),
           ).show(context),
           (_) {
-            ExtendedNavigator.of(context)
-                .replace(Routes.ordersListPage);
+            context.replaceRoute(const OrdersListPageRoute());
             context.read<AuthBloc>().add(const AuthEvent.authStatusRequested());
           },
         ),

@@ -8,8 +8,8 @@ class OrderCard extends StatelessWidget {
   final Order order;
 
   const OrderCard({
-    Key key,
-    @required this.order,
+    Key? key,
+    required this.order,
   }) : super(key: key);
 
   @override
@@ -27,8 +27,7 @@ class OrderCard extends StatelessWidget {
         child: ListTile(
           title: Text(order.id.getOrThrow()),
           trailing: Text(order.status.toJsonString()),
-          onTap: () =>
-              ExtendedNavigator.of(context).pushOrderFormPage(order: order),
+          onTap: () => context.pushRoute(OrderFormPageRoute(order: order)),
         ),
       );
 }

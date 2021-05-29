@@ -5,19 +5,18 @@ import 'package:dopagent_frontend/application/deposits/deposit_form/deposit_form
 import 'package:dopagent_frontend/domain/deposits/deposit.dart';
 import 'package:dopagent_frontend/presentation/deposits/deposit_form/widgets/account_number_field.dart';
 import 'package:dopagent_frontend/presentation/deposits/deposit_form/widgets/no_of_installments_field.dart';
-import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DepositFormPage extends StatelessWidget {
   final Deposit deposit;
   final void Function(Deposit) onDepositSaved;
-  final void Function(Deposit) onDepositDeleted;
+  final void Function(Deposit)? onDepositDeleted;
 
   const DepositFormPage({
-    Key key,
-    @required this.deposit,
-    @required this.onDepositSaved,
+    Key? key,
+    required this.deposit,
+    required this.onDepositSaved,
     this.onDepositDeleted,
   }) : super(key: key);
 
@@ -25,7 +24,7 @@ class DepositFormPage extends StatelessWidget {
   Widget build(BuildContext context) => BlocProvider(
         create: (context) => DepositFormBloc(
           onDepositSaved: onDepositSaved,
-          onDepositDeleted: onDepositDeleted,
+          onDepositDeleted: onDepositDeleted ?? (_) {}, // TODO: Check if this can be non nullable
         )..add(DepositFormEvent.initialize(optionOf(deposit))),
         child: BlocConsumer<DepositFormBloc, DepositFormState>(
           listenWhen: (prevState, currState) =>
@@ -39,9 +38,10 @@ class DepositFormPage extends StatelessWidget {
                 ),
               ).show(context),
               (_) {
-                ExtendedNavigator.of(context).popUntil(
-                  (route) => route.settings.name == Routes.orderFormPage,
-                );
+                context.popRoute();
+                // ExtendedNavigator.of(context).popUntil(
+                //   (route) => route.settings.name == Routes.orderFormPage,
+                // );
               },
             ),
           ),
@@ -60,8 +60,8 @@ class DepositFormPage extends StatelessWidget {
 class SavingInProgressOverlay extends StatelessWidget {
   final bool isSaving;
   const SavingInProgressOverlay({
-    Key key,
-    @required this.isSaving,
+    Key? key,
+    required this.isSaving,
   }) : super(key: key);
 
   @override
@@ -82,7 +82,7 @@ class SavingInProgressOverlay extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 'Saving',
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
+                style: Theme.of(context).textTheme.bodyText2?.copyWith(
                       color: Colors.white,
                       fontSize: 16,
                     ),
@@ -97,7 +97,7 @@ class SavingInProgressOverlay extends StatelessWidget {
 
 class DepositFormPageScaffold extends StatelessWidget {
   const DepositFormPageScaffold({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

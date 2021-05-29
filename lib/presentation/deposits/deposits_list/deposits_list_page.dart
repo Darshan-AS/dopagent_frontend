@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DepositsListPage extends StatelessWidget {
-  const DepositsListPage({Key key}) : super(key: key);
+  const DepositsListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,7 @@ class DepositsListPage extends StatelessWidget {
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               state.maybeMap(
-                unauthenticated: (_) =>
-                    ExtendedNavigator.of(context).replace(Routes.signInPage),
+                unauthenticated: (_) => context.replaceRoute(const SignInPageRoute()),
                 orElse: () {},
               );
             },

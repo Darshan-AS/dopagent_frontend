@@ -8,13 +8,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'deposit.freezed.dart';
 
 @freezed
-abstract class Deposit implements _$Deposit {
+class Deposit with _$Deposit {
   const factory Deposit({
-    @required UniqueId id,
-    @required AccountNumber accountNumber,
-    @required NoOfInstallments noOfInstallments,
-    Date openingDate,
-    Denomination denomination,
+    required UniqueId id,
+    required AccountNumber accountNumber,
+    required NoOfInstallments noOfInstallments,
+    Date? openingDate,
+    Denomination? denomination,
   }) = _Deposit;
 
   const Deposit._();
@@ -26,7 +26,7 @@ abstract class Deposit implements _$Deposit {
       );
 
   Either<ValueFailure<dynamic>, double> get amount => Either.map2(
-        denomination.value,
+        denomination?.value,
         noOfInstallments.value,
         (double d, int n) => d * n.toDouble(),
       );

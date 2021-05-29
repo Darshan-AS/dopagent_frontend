@@ -1,7 +1,7 @@
 part of 'deposit_form_bloc.dart';
 
 @freezed
-abstract class DepositFormEvent with _$DepositFormEvent {
+class DepositFormEvent with _$DepositFormEvent {
   const factory DepositFormEvent.initialize(
     Option<Deposit> optionDeposit,
   ) = _EditingDeposit;

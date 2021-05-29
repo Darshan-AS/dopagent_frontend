@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dopagent_frontend/application/deposits/deposits_actor/deposits_actor_bloc.dart';
 import 'package:dopagent_frontend/application/orders/order_form/order_form_bloc.dart';
 import 'package:dopagent_frontend/domain/deposits/deposit.dart';
 import 'package:dopagent_frontend/presentation/routes/router.gr.dart';
@@ -24,9 +23,7 @@ class DepositCard extends StatelessWidget {
             caption: 'Delete',
             icon: Icons.delete,
             color: Colors.red,
-            onTap: () => context
-                .read<DepositsActorBloc>()
-                .add(DepositsActorEvent.deleted(deposit)),
+            onTap: () {},
           ),
         ],
         child: ListTile(

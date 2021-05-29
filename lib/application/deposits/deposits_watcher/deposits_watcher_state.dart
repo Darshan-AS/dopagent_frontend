@@ -1,7 +1,7 @@
 part of 'deposits_watcher_bloc.dart';
 
 @freezed
-abstract class DepositsWatcherState with _$DepositsWatcherState {
+class DepositsWatcherState with _$DepositsWatcherState {
   const factory DepositsWatcherState.initial() = _Initial;
 
   const factory DepositsWatcherState.loading() = _Loading;

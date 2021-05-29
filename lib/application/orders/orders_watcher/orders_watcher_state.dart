@@ -1,7 +1,7 @@
 part of 'orders_watcher_bloc.dart';
 
 @freezed
-abstract class OrdersWatcherState with _$OrdersWatcherState {
+class OrdersWatcherState with _$OrdersWatcherState {
   const factory OrdersWatcherState.initial() = _Initial;
 
   const factory OrdersWatcherState.loading() = _Loading;

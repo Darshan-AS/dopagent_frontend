@@ -17,8 +17,8 @@ class DepositFormBloc extends Bloc<DepositFormEvent, DepositFormState> {
   final void Function(Deposit) onDepositDeleted;
 
   DepositFormBloc({
-    @required this.onDepositSaved,
-    this.onDepositDeleted,
+    required this.onDepositSaved,
+    required this.onDepositDeleted,
   }) : super(DepositFormState.initial());
 
   @override

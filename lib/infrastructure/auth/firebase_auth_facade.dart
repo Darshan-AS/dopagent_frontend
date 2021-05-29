@@ -5,7 +5,6 @@ import 'package:dopagent_frontend/domain/auth/i_auth_facade.dart';
 import 'package:dopagent_frontend/domain/auth/value_objects.dart';
 import 'package:dopagent_frontend/infrastructure/auth/firebase_user_mapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
@@ -26,8 +25,8 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> signUpWithEmail({
-    @required Email email,
-    @required Password password,
+    required Email email,
+    required Password password,
   }) async {
     final emailString = email.getOrThrow();
     final passwordString = password.getOrThrow();
@@ -51,8 +50,8 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> signInWithEmail({
-    @required Email email,
-    @required Password password,
+    required Email email,
+    required Password password,
   }) async {
     final emailString = email.getOrThrow();
     final passwordString = password.getOrThrow();

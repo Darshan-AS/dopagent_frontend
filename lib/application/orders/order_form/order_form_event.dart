@@ -1,7 +1,7 @@
 part of 'order_form_bloc.dart';
 
 @freezed
-abstract class OrderFormEvent with _$OrderFormEvent {
+class OrderFormEvent with _$OrderFormEvent {
   const factory OrderFormEvent.initialize(Option<Order> optionOrder) =
       _EditingOrder;
 

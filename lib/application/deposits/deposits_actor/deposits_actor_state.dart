@@ -1,7 +1,7 @@
 part of 'deposits_actor_bloc.dart';
 
 @freezed
-abstract class DepositsActorState with _$DepositsActorState {
+class DepositsActorState with _$DepositsActorState {
   const factory DepositsActorState.initial() = _Initial;
 
   const factory DepositsActorState.inProgress() = _InProgress;

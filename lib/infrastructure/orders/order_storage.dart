@@ -11,13 +11,13 @@ part 'order_storage.freezed.dart';
 part 'order_storage.g.dart';
 
 @freezed
-abstract class OrderStorage implements _$OrderStorage {
+class OrderStorage with _$OrderStorage {
   @HiveType(typeId: 2)
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory OrderStorage({
-    @JsonKey(ignore: true) @HiveField(0) String id,
-    @required @HiveField(1) String status,
-    @required @HiveField(2) List<DepositStorage> deposits,
+    @JsonKey(ignore: true) @HiveField(0) String? id,
+    @HiveField(1) required String status,
+    @HiveField(2) required List<DepositStorage> deposits,
   }) = _OrderStorage;
 
   const OrderStorage._();

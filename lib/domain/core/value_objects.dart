@@ -21,7 +21,7 @@ abstract class ValueObject<T> extends Equatable {
 
   bool isValid() => value.isRight();
 
-  T getOrThrow({e = UnexpectedValueError}) => value.fold((f) => throw e(f), id);
+  T getOrThrow({Type e = UnexpectedValueError}) => value.fold((f) => throw UnexpectedValueError(f), id); // TODO: Change this to theow e(f)
 
   Either<ValueFailure<dynamic>, Unit> get getFailureOrUnit => value.fold(
         (f) => left(f),
@@ -38,9 +38,8 @@ class UniqueId extends ValueObject<String> {
   }
   const UniqueId._(this.value);
 
-  factory UniqueId.fromUniqueString(String uniqueId) {
-    assert(uniqueId != null);
-    return UniqueId._(right(uniqueId));
+  factory UniqueId.fromUniqueString(String? uniqueId) {
+    return uniqueId != null ? UniqueId._(right(uniqueId)) : UniqueId(); // TODO: CHECK if this change has any side effects
   }
 }
 
